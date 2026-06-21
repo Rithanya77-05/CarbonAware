@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --color-primary: #22C55E;
+  --color-primary-dark: #15803D;
+  --color-accent: #2563EB;
+}
+
+:root {
+  --bg-color: #F8FAFC;
+  --fg-color: #0F172A;
+  --card-color: #FFFFFF;
+  --card-fg-color: #0F172A;
+  --border-color: #E2E8F0;
+}
+
+.dark {
+  --bg-color: #0F172A;
+  --fg-color: #F8FAFC;
+  --card-color: #1E293B;
+  --card-fg-color: #F8FAFC;
+  --border-color: #334155;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--fg-color);
+  transition: background-color 0.3s, color 0.3s;
+}
