@@ -1,7 +1,7 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useUserData } from '../context/UserDataContext';
-import { TreePine, Wind, Sun, Zap, Trophy } from 'lucide-react';
+import { TreePine, Wind, Trophy } from 'lucide-react';
 
 // Calculate a 0–100 sustainability score
 const calcCityScore = (footprint, ecoPoints, completedChallenges) => {
@@ -105,14 +105,8 @@ const getNextStageThreshold = (score) => {
   return STAGES[currentStage.level].range[0];
 };
 
-const CityScene = ({ stage, score }) => {
-  const floatVariants = {
-    animate: {
-      y: [0, -8, 0],
-      transition: { duration: 3, repeat: Infinity, ease: 'easeInOut' },
-    },
-  };
-
+const CityScene = ({ stage }) => {
+  
   return (
     <div className="relative rounded-2xl overflow-hidden h-52 select-none">
       {/* Sky gradient */}

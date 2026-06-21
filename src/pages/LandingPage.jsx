@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight, Leaf, Activity, Trophy, LineChart } from 'lucide-react';
@@ -73,24 +72,6 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-20 border-t border-slate-200 dark:border-slate-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            {[
-              { label: 'Users Impacted', value: '10,000+' },
-              { label: 'Carbon Saved', value: '500k kg' },
-              { label: 'Trees Equivalent', value: '25,000' },
-              { label: 'Challenges Completed', value: '100k+' },
-            ].map((stat, idx) => (
-              <div key={idx} className="p-4">
-                <div className="text-4xl font-bold text-green-500 mb-2">{stat.value}</div>
-                <div className="text-slate-600 dark:text-slate-400 font-medium">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
     </div>
   );
 };

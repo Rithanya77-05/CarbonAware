@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { useUserData } from '../context/UserDataContext';
@@ -50,6 +50,26 @@ const calculateFootprint = (data) => {
   };
 };
 
+const SectionCard = ({ title, icon: Icon, children }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    exit={{ opacity: 0, y: -20 }}
+    transition={{ duration: 0.3 }}
+    className="w-full max-w-xl bg-white dark:bg-slate-800 p-8 rounded-3xl border border-slate-100 dark:border-slate-700 shadow-sm"
+  >
+    <div className="flex items-center gap-4 mb-8">
+      <div className="p-3 rounded-2xl bg-green-100 dark:bg-green-900/30 text-green-500">
+        <Icon className="w-6 h-6" />
+      </div>
+      <h2 className="text-2xl font-bold">{title}</h2>
+    </div>
+    <div className="space-y-6">
+      {children}
+    </div>
+  </motion.div>
+);
+
 const Calculator = () => {
   const { addHistoryEntry, setPersonality, setRoadmap } = useUserData();
   const navigate = useNavigate();
@@ -58,31 +78,26 @@ const Calculator = () => {
 
   const [formData, setFormData] = useState({
     vehicle: 'car',
-    distance: 10,
+    distance: 15,
     acHours: 2,
-    fanHours: 5,
+    fanHours: 4,
     tvHours: 2,
     fridgeHours: 24,
     washingUsage: 1,
     diet: 'mixed',
-    plasticWaste: 1,
-    foodWaste: 2,
-    recyclableWaste: 3,
+    plasticWaste: 2,
+    foodWaste: 1,
+    recyclableWaste: 2
   });
 
   const handleChange = (e) => {
-    const { name, value, type } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: type === 'number' ? Number(value) : value
-    }));
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleCalculate = () => {
     const res = calculateFootprint(formData);
     setResult(res);
     addHistoryEntry({ footprint: res.total, breakdown: res.breakdown });
-    // Phase 2: Generate personality and roadmap
     const personality = classifyPersonality(res.breakdown, res.total);
     setPersonality(personality);
     const roadmap = generateRoadmap(res.breakdown, res.total);
@@ -98,33 +113,14 @@ const Calculator = () => {
     Critical: 'text-red-500'
   };
 
-  const SectionCard = ({ title, icon: Icon, children }) => (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-      className="bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-xl border border-slate-100 dark:border-slate-700 max-w-2xl w-full mx-auto"
-    >
-      <div className="flex items-center gap-4 mb-8">
-        <div className="p-3 bg-green-100 dark:bg-green-900/30 text-green-500 rounded-2xl">
-          <Icon className="w-8 h-8" />
-        </div>
-        <h2 className="text-2xl font-bold">{title}</h2>
-      </div>
-      <div className="space-y-6">
-        {children}
-      </div>
-    </motion.div>
-  );
-
   return (
     <div className="min-h-[calc(100vh-4rem)] py-12 px-4 sm:px-6 flex flex-col justify-center items-center">
       
       {step === 1 && (
         <SectionCard title="Transportation" icon={Car}>
           <div>
-            <label className="block text-sm font-medium mb-2">Primary Mode of Transport</label>
-            <select name="vehicle" value={formData.vehicle} onChange={handleChange} className="w-full p-3 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 focus:ring-2 focus:ring-green-500 outline-none">
+            <label htmlFor="vehicle" className="block text-sm font-medium mb-2">Primary Mode of Transport</label>
+            <select id="vehicle" name="vehicle" value={formData.vehicle} onChange={handleChange} className="w-full p-3 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 focus:ring-2 focus:ring-green-500 outline-none">
               <option value="car">Car</option>
               <option value="bike">Motorbike</option>
               <option value="bus">Bus</option>
@@ -135,11 +131,11 @@ const Calculator = () => {
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium mb-2">Daily Distance (km)</label>
-            <input type="number" name="distance" min="0" value={formData.distance} onChange={handleChange} className="w-full p-3 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 focus:ring-2 focus:ring-green-500 outline-none" />
+            <label htmlFor="distance" className="block text-sm font-medium mb-2">Daily Distance (km)</label>
+            <input id="distance" type="number" name="distance" min="0" value={formData.distance} onChange={handleChange} className="w-full p-3 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 focus:ring-2 focus:ring-green-500 outline-none" />
           </div>
           <button onClick={() => setStep(2)} className="w-full mt-4 py-3 bg-green-500 text-white rounded-xl font-medium hover:bg-green-600 transition-colors flex justify-center items-center gap-2">
-            Next <ArrowRight className="w-4 h-4" />
+            Next <ArrowRight className="w-4 h-4" aria-hidden="true" />
           </button>
         </SectionCard>
       )}
@@ -148,20 +144,20 @@ const Calculator = () => {
         <SectionCard title="Electricity Consumption" icon={Zap}>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium mb-2">AC (hours/day)</label>
-              <input type="number" name="acHours" min="0" value={formData.acHours} onChange={handleChange} className="w-full p-3 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-900" />
+              <label htmlFor="acHours" className="block text-sm font-medium mb-2">AC (hours/day)</label>
+              <input id="acHours" type="number" name="acHours" min="0" value={formData.acHours} onChange={handleChange} className="w-full p-3 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-900" />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-2">Fan (hours/day)</label>
-              <input type="number" name="fanHours" min="0" value={formData.fanHours} onChange={handleChange} className="w-full p-3 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-900" />
+              <label htmlFor="fanHours" className="block text-sm font-medium mb-2">Fan (hours/day)</label>
+              <input id="fanHours" type="number" name="fanHours" min="0" value={formData.fanHours} onChange={handleChange} className="w-full p-3 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-900" />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-2">TV (hours/day)</label>
-              <input type="number" name="tvHours" min="0" value={formData.tvHours} onChange={handleChange} className="w-full p-3 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-900" />
+              <label htmlFor="tvHours" className="block text-sm font-medium mb-2">TV (hours/day)</label>
+              <input id="tvHours" type="number" name="tvHours" min="0" value={formData.tvHours} onChange={handleChange} className="w-full p-3 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-900" />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-2">Washing Machine (uses/day)</label>
-              <input type="number" name="washingUsage" min="0" value={formData.washingUsage} onChange={handleChange} className="w-full p-3 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-900" />
+              <label htmlFor="washingUsage" className="block text-sm font-medium mb-2">Washing Machine (uses/day)</label>
+              <input id="washingUsage" type="number" name="washingUsage" min="0" value={formData.washingUsage} onChange={handleChange} className="w-full p-3 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-900" />
             </div>
           </div>
           <div className="flex gap-4 mt-6">
@@ -195,16 +191,16 @@ const Calculator = () => {
       {step === 4 && (
         <SectionCard title="Waste Generation" icon={Trash2}>
           <div>
-            <label className="block text-sm font-medium mb-2">Plastic Waste (kg/week)</label>
-            <input type="number" name="plasticWaste" min="0" value={formData.plasticWaste} onChange={handleChange} className="w-full p-3 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-900" />
+            <label htmlFor="plasticWaste" className="block text-sm font-medium mb-2">Plastic Waste (kg/week)</label>
+            <input id="plasticWaste" type="number" name="plasticWaste" min="0" value={formData.plasticWaste} onChange={handleChange} className="w-full p-3 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-900" />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-2">Food Waste (kg/week)</label>
-            <input type="number" name="foodWaste" min="0" value={formData.foodWaste} onChange={handleChange} className="w-full p-3 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-900" />
+            <label htmlFor="foodWaste" className="block text-sm font-medium mb-2">Food Waste (kg/week)</label>
+            <input id="foodWaste" type="number" name="foodWaste" min="0" value={formData.foodWaste} onChange={handleChange} className="w-full p-3 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-900" />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-2">Recyclable Waste (kg/week)</label>
-            <input type="number" name="recyclableWaste" min="0" value={formData.recyclableWaste} onChange={handleChange} className="w-full p-3 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-900" />
+            <label htmlFor="recyclableWaste" className="block text-sm font-medium mb-2">Recyclable Waste (kg/week)</label>
+            <input id="recyclableWaste" type="number" name="recyclableWaste" min="0" value={formData.recyclableWaste} onChange={handleChange} className="w-full p-3 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-900" />
           </div>
           
           <div className="flex gap-4 mt-8">

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useUserData } from '../context/UserDataContext';
 import { Globe, AlertTriangle, CheckCircle2, Factory, TreePine, Lightbulb, Home, Car } from 'lucide-react';
@@ -15,7 +15,7 @@ const FutureEarthSimulator = () => {
   const yearlyCurrent = weeklyFootprint * 52;
 
   // Calculate potential sustainable projection
-  let weeklyReduction = 0;
+  let weeklyReduction;
   if (roadmap && roadmap.length > 0) {
     weeklyReduction = roadmap.reduce((sum, step) => sum + Number(step.estimatedReduction), 0);
   } else {

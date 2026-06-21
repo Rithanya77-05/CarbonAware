@@ -87,7 +87,6 @@ export const classifyPersonality = (breakdown, total) => {
 
   const t = Number(breakdown.transport);
   const e = Number(breakdown.energy);
-  const f = Number(breakdown.food);
   const w = Number(breakdown.waste);
   const tot = Number(total);
 
@@ -110,7 +109,6 @@ export const generateRoadmap = (breakdown, total) => {
   const e = Number(breakdown.energy);
   const f = Number(breakdown.food);
   const w = Number(breakdown.waste);
-  const tot = Number(total);
 
   // Sort categories by emission size descending
   const categories = [

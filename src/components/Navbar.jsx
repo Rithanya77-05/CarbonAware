@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTheme } from './ThemeProvider';
 import { Leaf, Sun, Moon, LayoutDashboard, Calculator as CalcIcon, Trophy } from 'lucide-react';

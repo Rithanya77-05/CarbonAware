@@ -1,6 +1,5 @@
-import React from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle2, Circle, Target, TrendingDown, Car, Zap, Utensils, Trash2 } from 'lucide-react';
+import { CheckCircle2, Target, TrendingDown, Car, Zap, Utensils, Trash2 } from 'lucide-react';
 import { useUserData } from '../context/UserDataContext';
 
 const categoryIcons = {

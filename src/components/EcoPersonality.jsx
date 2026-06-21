@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { Zap, Car, Leaf, Trash2, Recycle, Sprout, ArrowUpRight } from 'lucide-react';
 

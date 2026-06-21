@@ -1,61 +1,80 @@
 # CarbonAware
 
-**CarbonAware** is an intelligent carbon footprint awareness platform designed to help individuals understand, track, and reduce their environmental impact through data-driven insights, sustainability challenges, EcoBot guidance, and personalized action plans.
+## Challenge Chosen
 
----
+Carbon Footprint Awareness Platform
+
+## Problem Statement
+
+As global climate change accelerates, individuals often feel disconnected from the environmental impact of their daily routines. Many people want to reduce their carbon footprint but lack the accessible tools, data-driven insights, and actionable guidance needed to make sustainable choices in transportation, energy usage, diet, and waste generation.
+
+## Solution Overview
+
+CarbonAware is an interactive, gamified platform that helps users calculate, understand, and reduce their carbon footprint. By breaking down complex emissions data into intuitive visualizations and offering a personalized 4-week roadmap, CarbonAware transforms the overwhelming task of living sustainably into an engaging, achievable journey.
 
 ## Features
 
-- 🧮 **Carbon Footprint Calculator** — 4-step interactive form covering transport, energy, food, and waste
-- 📊 **Analytics Dashboard** — Real-time charts (pie + line), summary stats, and history tracking
-- 🌍 **Eco Personality Engine** — Auto-classifies users into 6 eco-personality types
-- 🗺️ **Sustainability Roadmap** — Personalized 4-week action plans with step completion tracking
-- 🏙️ **Green City Simulator** — Visual city that evolves (5 stages) based on your carbon score
-- 🌍 **Future Earth Simulator** — Current vs. Sustainable lifestyle projections with real-world impact equivalents
-- 📊 **Compare vs. Average** — See how your footprint compares to the global average (95 kg/week)
-- 🤖 **EcoBot AI Assistant** — Floating chatbot with rule-based intelligent responses
-- 🏆 **Challenges & Leaderboard** — Daily challenges, Eco Points, badges, and level progression
-- 🌙 **Dark Mode** — Full light/dark theme with localStorage persistence
-
----
+- **Carbon Footprint Calculator**: A multi-step form to assess transport, energy, food, and waste emissions.
+- **Analytics Dashboard**: Real-time charts, global average comparisons, and tracking over time.
+- **Eco Personality Engine**: Automatically classifies users into profiles based on emission categories.
+- **Sustainability Roadmap**: A personalized, actionable 4-week plan to reduce carbon output.
+- **Green City Simulator**: A visual, evolving city that grows greener as the user's score improves.
+- **Future Earth Simulator**: Side-by-side projection of current vs sustainable lifestyle impacts.
+- **EcoBot**: An intelligent AI-style assistant providing immediate sustainability tips and guidance.
+- **Gamification Hub**: Daily challenges, eco points, badges, and a competitive leaderboard.
+- **Dark Mode & Local Storage**: Full UI themes and seamless browser data persistence.
 
 ## Tech Stack
 
-| Technology | Purpose |
-|---|---|
-| React + Vite | Frontend framework and build tool |
-| Tailwind CSS v4 | Styling with eco-friendly palette |
-| Framer Motion | Smooth animations and transitions |
-| Recharts | Data visualization charts |
-| React Router v7 | Client-side navigation |
-| Lucide React | Icon library |
-| localStorage | Data persistence (no backend required) |
+* React + Vite
+* Tailwind CSS
+* Recharts
+* Framer Motion
+* LocalStorage
 
----
+## How It Works
 
-## Getting Started
+- **Carbon calculation**: The engine uses standard emission factors (e.g., kg CO₂ per km for vehicles, dietary impacts) to calculate weekly footprints based on user inputs.
+- **Dashboard analytics**: Stores historical calculations in `localStorage` to chart trends and calculate total carbon saved vs. the global average.
+- **EcoBot**: Offers rule-based chat assistance directly integrated into the UI.
+- **Sustainability roadmap**: Analyzes the highest emission categories and generates actionable weekly steps with estimated reduction values.
+- **Sustainable city evolution**: Translates the user's carbon score and completed challenges into a visual 5-stage city ranging from "Polluted" to "Future Sustainable City".
+
+## Assumptions
+
+- Calculations are based on generalized global averages (e.g., standard vehicle emissions per km, standard household appliance wattage).
+- The "Global Average" for comparison is assumed to be 150 kg CO₂ per week.
+- One tree is assumed to absorb approximately 22 kg of CO₂ per year for "Trees Equivalent" metrics.
+
+## Installation
 
 ```bash
 npm install
+```
+
+## Run
+
+```bash
 npm run dev
 ```
 
-Open [http://localhost:5173](http://localhost:5173) to view the app.
+## Build
 
----
+```bash
+npm run build
+```
 
-## Color Palette
+## Testing
 
-| Name | Hex |
-|---|---|
-| Primary Green | `#22C55E` |
-| Dark Green | `#15803D` |
-| Blue Accent | `#2563EB` |
-| Light Background | `#F8FAFC` |
-| Dark Background | `#0F172A` |
+```bash
+npm run test
+```
 
----
+## Deployment
 
-## License
-
-MIT © 2026 CarbonAware
+**Vercel deployment instructions:**
+1. Push your repository to GitHub.
+2. Log into [Vercel](https://vercel.com) and click **Add New** > **Project**.
+3. Import your GitHub repository.
+4. Vercel will automatically detect the Vite framework and apply the correct build settings (`npm run build`).
+5. Click **Deploy**. Your application will be live in minutes.

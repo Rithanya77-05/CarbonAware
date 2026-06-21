@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { useUserData } from '../context/UserDataContext';
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, LineChart, Line, CartesianGrid, XAxis, YAxis } from 'recharts';
 import { TreePine, Wind, Activity, TrendingDown } from 'lucide-react';
@@ -12,6 +12,24 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 const COLORS = ['#3b82f6', '#eab308', '#22c55e', '#ef4444'];
+
+const StatCard = ({ title, value, subtitle, icon: Icon, color, delay = 0 }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.4, delay }}
+    className="bg-white dark:bg-slate-800 p-6 rounded-3xl border border-slate-100 dark:border-slate-700 shadow-sm flex items-center gap-6"
+  >
+    <div className={`p-4 rounded-2xl ${color}`}>
+      <Icon className="w-8 h-8" />
+    </div>
+    <div>
+      <h3 className="text-slate-500 dark:text-slate-400 text-sm font-medium mb-1">{title}</h3>
+      <div className="text-2xl font-bold text-slate-900 dark:text-white">{value}</div>
+      {subtitle && <div className="text-xs text-slate-400 mt-1">{subtitle}</div>}
+    </div>
+  </motion.div>
+);
 
 const Dashboard = () => {
   const { userData } = useUserData();
@@ -38,24 +56,6 @@ const Dashboard = () => {
 
   const treesEquivalent = latestEntry ? Math.max(0, Math.floor((150 - Number(latestEntry.footprint)) / 10)) : 0;
   const carbonSaved = latestEntry ? Math.max(0, 150 - Number(latestEntry.footprint)).toFixed(1) : 0;
-
-  const StatCard = ({ title, value, subtitle, icon: Icon, color, delay = 0 }) => (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, delay }}
-      className="bg-white dark:bg-slate-800 p-6 rounded-3xl border border-slate-100 dark:border-slate-700 shadow-sm flex items-center gap-6"
-    >
-      <div className={`p-4 rounded-2xl ${color}`}>
-        <Icon className="w-8 h-8" />
-      </div>
-      <div>
-        <h3 className="text-slate-500 dark:text-slate-400 text-sm font-medium mb-1">{title}</h3>
-        <div className="text-2xl font-bold text-slate-900 dark:text-white">{value}</div>
-        {subtitle && <div className="text-xs text-slate-400 mt-1">{subtitle}</div>}
-      </div>
-    </motion.div>
-  );
 
   if (history.length === 0) {
     return (

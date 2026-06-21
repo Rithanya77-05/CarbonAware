@@ -1,4 +1,3 @@
-import React from 'react';
 import { Lightbulb } from 'lucide-react';
 
 const generateRecommendations = (breakdown) => {

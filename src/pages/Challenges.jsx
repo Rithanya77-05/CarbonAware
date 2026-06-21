@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { useUserData } from '../context/UserDataContext';
 import { Trophy, Star, Medal, CheckCircle2, TrendingUp } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -55,7 +55,7 @@ const Challenges = () => {
       { rank: 4, name: 'Mike T.', saved: 90, points: 150 },
     ];
     return list.sort((a, b) => b.points - a.points).map((item, idx) => ({...item, rank: idx + 1}));
-  }, [userData]);
+  }, [userData, ecoPoints]);
 
   const diffColors = {
     Easy: 'bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-400',
