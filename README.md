@@ -24,6 +24,61 @@ CarbonAware is an interactive, gamified platform that helps users calculate, und
 - **Gamification Hub**: Daily challenges, eco points, badges, and a competitive leaderboard.
 - **Dark Mode & Local Storage**: Full UI themes and seamless browser data persistence.
 
+  ## Challenge Chosen
+
+**Carbon Footprint Awareness Platform**
+
+CarbonAware was developed to help individuals understand, track, and reduce their environmental impact through data-driven insights, sustainability recommendations, and interactive engagement features.
+
+---
+
+## Approach & Logic
+
+CarbonAware collects user inputs across four major lifestyle categories:
+
+* Transportation
+* Electricity Consumption
+* Food Habits
+* Waste Generation
+
+Using predefined emission factors, the platform estimates the user's carbon footprint and generates a Carbon Score.
+
+Based on the calculated score and emission breakdown, CarbonAware provides:
+
+* Personalized sustainability recommendations
+* Eco Personality classification
+* Sustainability Roadmap generation
+* Sustainable City evolution
+* Future Earth projections
+
+The objective is to transform environmental data into actionable insights that encourage long-term sustainable behavior.
+
+---
+
+## How It Works
+
+1. The user completes the Carbon Footprint Calculator.
+2. Carbon emissions are calculated using weighted emission factors.
+3. A Carbon Score is generated.
+4. Dashboard analytics visualize the results.
+5. The Eco Personality Engine classifies the user.
+6. Personalized sustainability recommendations are generated.
+7. A Sustainability Roadmap is created.
+8. EcoBot provides contextual guidance and suggestions.
+9. Progress is tracked through Eco Points, badges, challenges, and historical records.
+
+---
+
+## Assumptions
+
+* Transportation emissions are estimated using average emission factors.
+* Electricity calculations are based on typical appliance consumption patterns.
+* Food impact is categorized into Vegetarian, Mixed, and Non-Vegetarian lifestyles.
+* Waste generation is estimated using simplified waste metrics.
+* Global comparison values are used for awareness purposes and may not represent exact real-world averages.
+* All user data is stored locally using browser localStorage.
+
+
 ## Tech Stack
 
 * React + Vite
